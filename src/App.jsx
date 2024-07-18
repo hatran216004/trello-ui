@@ -1,19 +1,15 @@
-import HomeIcon from '@mui/icons-material/Home'
-import { pink } from '@mui/material/colors'
-import AddIcon from '@mui/icons-material/Add'
+import Button from '@mui/material/Button'
+import Typography from '@mui/material/Typography'
 
 function App() {
   return (
     <>
-      <div>eqwe</div>
-      <AddIcon />
-      <HomeIcon />
-      <HomeIcon color="primary" />
-      <HomeIcon color="secondary" />
-      <HomeIcon color="success" />
-      <HomeIcon color="action" />
-      <HomeIcon color="disabled" />
-      <HomeIcon sx={{ color: pink[500] }} />
+      <Typography variant="body2" color="text.secondary">
+        h1. Heading
+      </Typography>
+      <Button variant="text">Text</Button>
+      <Button variant="contained">Contained</Button>
+      <Button variant="outlined">Outlined</Button>
     </>
   )
 }
