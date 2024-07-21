@@ -1,19 +1,42 @@
-import Button from '@mui/material/Button'
-import Typography from '@mui/material/Typography'
+import Container from '@mui/material/Container'
 import ModeSelect from './components/ModeSelect'
+import Box from '@mui/material/Box'
 
 function App() {
   return (
-    <>
-      <ModeSelect />
-      <hr />
-      <Typography variant="body2" color="text.secondary">
-        h1. Heading
-      </Typography>
-      <Button variant="text">Text</Button>
-      <Button variant="contained">Contained</Button>
-      <Button variant="outlined">Outlined</Button>
-    </>
+    <Container disableGutters maxWidth={false} sx={{ height: '100vh' }}>
+      <header>
+        <Box
+          sx={{
+            backgroundColor: 'primary.main',
+            height: (theme) => theme.trello.appBarHeight,
+            display: 'flex',
+            alignItems: 'center'
+          }}
+        >
+          <ModeSelect />
+        </Box>
+      </header>
+      <nav>
+        <Box
+          sx={{
+            backgroundColor: 'primary.light',
+            height: (theme) => theme.trello.boardBarHeight
+          }}
+        >
+          Board bar
+        </Box>
+      </nav>
+      <Box
+        sx={{
+          backgroundColor: 'primary.dark',
+          height: (theme) =>
+            `calc(100vh - ${theme.trello.appBarHeight} - ${theme.trello.boardBarHeight})`
+        }}
+      >
+        Content
+      </Box>
+    </Container>
   )
 }
 
