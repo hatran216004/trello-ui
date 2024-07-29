@@ -35,7 +35,7 @@ const AppBar = () => {
             <SvgIcon
               component={TrelloIcon}
               inheritViewBox
-              sx={{ color: 'primary.main' }}
+              sx={{ color: 'primary.main', width: '22px', height: '22px' }}
             />
             <Typography
               variant="span"
@@ -68,13 +68,12 @@ const AppBar = () => {
               color="primary"
               sx={{ marginLeft: 1, cursor: 'pointer' }}
             >
-              <NotificationsNoneIcon color="primary.main" />
+              <NotificationsNoneIcon sx={{ color: 'primary.main' }} />
             </Badge>
           </Tooltip>
           <Tooltip title="Help">
             <HelpOutlineIcon
-              color="primary.main"
-              sx={{ marginLeft: 2, cursor: 'pointer' }}
+              sx={{ marginLeft: 2, color: 'primary.main', cursor: 'pointer' }}
             />
           </Tooltip>
           <Profile />

@@ -8,24 +8,60 @@ const theme = extendTheme({
     boardBarHeight: '64px'
   },
   colorSchemes: {
-    light: {
-      palette: {
-        primary: blue,
-        text: {
-          primary: grey[900],
-          secondary: grey[800]
+    // light: {
+    //   palette: {
+    //     primary: blue,
+    //     text: {
+    //       primary: grey[900],
+    //       secondary: grey[800]
+    //     }
+    //   }
+    // },
+    // dark: {
+    //   palette: {
+    //     primary: {
+    //       main: '#000'
+    //     },
+    //     text: {
+    //       primary: '#fff',
+    //       secondary: '#fff'
+    //     }
+    //   }
+    // }
+  },
+  components: {
+    // Name of the component
+    MuiButton: {
+      styleOverrides: {
+        // Name of the slot
+        root: {
+          textTransform: 'initial'
         }
       }
     },
-    dark: {
-      palette: {
-        primary: {
-          main: '#000'
-        },
-        text: {
-          primary: '#fff',
-          secondary: '#fff'
-        }
+    MuiInputLabel: {
+      styleOverrides: {
+        // Name of the slot
+        root: ({ theme }) => ({
+          color: theme.palette.primary.main,
+          fontSize: '0.875rem'
+        })
+      }
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          color: theme.palette.primary.main,
+          fontSize: '0.875rem',
+          '.MuiOutlinedInput-notchedOutline': {
+            borderColor: theme.palette.primary.light
+          },
+          '&:hover': {
+            '.MuiOutlinedInput-notchedOutline': {
+              borderColor: theme.palette.primary.main
+            }
+          }
+        })
       }
     }
   }
