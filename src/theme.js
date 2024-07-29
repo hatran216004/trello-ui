@@ -1,4 +1,4 @@
-import { blue, cyan, deepOrange, orange } from '@mui/material/colors'
+import { grey, blue } from '@mui/material/colors'
 import { experimental_extendTheme as extendTheme } from '@mui/material/styles'
 
 // Create a theme instance.
@@ -11,13 +11,21 @@ const theme = extendTheme({
     light: {
       palette: {
         primary: blue,
-        secondary: deepOrange
+        text: {
+          primary: grey[900],
+          secondary: grey[800]
+        }
       }
     },
     dark: {
       palette: {
-        primary: cyan,
-        secondary: orange
+        primary: {
+          main: '#000'
+        },
+        text: {
+          primary: '#fff',
+          secondary: grey[500]
+        }
       }
     }
   }
