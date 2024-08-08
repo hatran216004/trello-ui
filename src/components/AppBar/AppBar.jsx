@@ -17,6 +17,8 @@ import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone'
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
 import Tooltip from '@mui/material/Tooltip'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
+import InputAdornment from '@mui/material/InputAdornment'
+import SearchIcon from '@mui/icons-material/Search'
 
 const AppBar = () => {
     return (
@@ -74,6 +76,15 @@ const AppBar = () => {
                         label="Search..."
                         type="search"
                         size="small"
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <SearchIcon
+                                        sx={{ color: 'primary.main' }}
+                                    />
+                                </InputAdornment>
+                            )
+                        }}
                     />
                     <ModeSelect />
                     <Tooltip title="Notification">

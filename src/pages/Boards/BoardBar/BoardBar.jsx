@@ -13,7 +13,6 @@ import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt'
 
 const MENU_STYLES = {
     paddingX: 2,
-    bgcolor: 'transparent',
     color: 'primary.main',
     '&:hover': {
         bgcolor: 'rgba(25, 118, 210, 0.2)'
@@ -26,13 +25,17 @@ const BoardBar = () => {
         <nav>
             <Box
                 sx={{
-                    height: (theme) => theme.trello.boardBarHeight,
                     paddingX: 2,
-                    borderTop: '2px solid blue',
+                    height: (theme) => theme.trello.boardBarHeight,
+                    borderTop: '2px solid',
+                    borderTopColor: (theme) =>
+                        theme.palette.mode == 'dark' ? '#fff' : 'blue',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    gap: 1
+                    gap: 1,
+                    bgcolor: (theme) =>
+                        theme.palette.mode === 'dark' ? '#22344e' : '#fff'
                 }}
             >
                 <Box
