@@ -27,9 +27,6 @@ const BoardBar = () => {
                 sx={{
                     paddingX: 2,
                     height: (theme) => theme.trello.boardBarHeight,
-                    borderTop: '2px solid',
-                    borderTopColor: (theme) =>
-                        theme.palette.mode == 'dark' ? '#fff' : 'blue',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
@@ -98,7 +95,7 @@ const BoardBar = () => {
                         <Tooltip title="Ha Tran">
                             <Avatar
                                 alt="Ha Tran"
-                                src="https://scontent.fsgn19-1.fna.fbcdn.net/v/t39.30808-6/335849762_647057723892150_2740165209836350945_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeF9yJp0S9wtQK4a-rJaA32vUN3YSYbt2CpQ3dhJhu3YKtYoh2fuWZMbcfc6xNljlVig5_krn99ByVBrjXRH5bds&_nc_ohc=KBAjOmKgdZwQ7kNvgGTwt1a&_nc_ht=scontent.fsgn19-1.fna&oh=00_AYB9z5goamHRJu-cahYDuv6T4vUmT6rvhsOlE_IUZOUa7g&oe=66B9136D"
+                                src="https://i.pinimg.com/564x/e9/8d/91/e98d9111d9d7494247de54fd52a240a8.jpg"
                             />
                         </Tooltip>
                         <Tooltip title="Ha Tran">

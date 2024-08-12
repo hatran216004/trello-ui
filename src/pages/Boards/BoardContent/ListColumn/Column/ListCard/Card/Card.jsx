@@ -1,4 +1,4 @@
-import Card from '@mui/material/Card'
+import { Card as MuiCard } from '@mui/material'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
@@ -8,23 +8,28 @@ import GroupIcon from '@mui/icons-material/Group'
 import ModeCommentIcon from '@mui/icons-material/ModeComment'
 import AttachmentIcon from '@mui/icons-material/Attachment'
 
-const MediaCard = () => {
+const Card = ({ temporaryHideMedia }) => {
     return (
-        <Card
+        <MuiCard
             sx={{
                 cursor: 'pointer',
                 boxShadow: 'none'
             }}
         >
             <CardMedia
-                sx={{ height: 140 }}
+                sx={{
+                    height: 140,
+                    display: temporaryHideMedia ? 'none' : 'block'
+                }}
                 image="https://i.pinimg.com/564x/01/2a/2c/012a2ce3c1ce121384a9299d34c0d6a0.jpg"
                 title="green iguana"
             />
             <CardContent sx={{ padding: 1, '&:last-child': { padding: 1 } }}>
                 <Typography>Lizard</Typography>
             </CardContent>
-            <CardActions>
+            <CardActions
+                sx={{ display: temporaryHideMedia ? 'none' : 'block' }}
+            >
                 <Button size="small" startIcon={<GroupIcon />}>
                     20
                 </Button>
@@ -35,8 +40,8 @@ const MediaCard = () => {
                     12
                 </Button>
             </CardActions>
-        </Card>
+        </MuiCard>
     )
 }
 
-export default MediaCard
+export default Card

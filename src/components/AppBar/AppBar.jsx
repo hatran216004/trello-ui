@@ -73,7 +73,8 @@ const AppBar = () => {
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                     <TextField
                         id="outlined-search"
-                        label="Search..."
+                        label="Search"
+                        placeholder="Search..."
                         type="search"
                         size="small"
                         InputProps={{
