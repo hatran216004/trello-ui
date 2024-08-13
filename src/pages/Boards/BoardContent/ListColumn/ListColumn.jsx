@@ -3,7 +3,7 @@ import Column from './Column'
 import Button from '@mui/material/Button'
 import NoteAddIcon from '@mui/icons-material/NoteAdd'
 
-const ListColumn = () => {
+const ListColumn = ({ columns }) => {
     return (
         <Box
             sx={{
@@ -14,11 +14,9 @@ const ListColumn = () => {
                 overflowX: 'auto'
             }}
         >
-            {Array(5)
-                .fill(1)
-                .map((item, index) => {
-                    return <Column key={index} />
-                })}
+            {columns.map((column) => (
+                <Column key={column._id} column={column} />
+            ))}
             <Button
                 startIcon={<NoteAddIcon />}
                 sx={{

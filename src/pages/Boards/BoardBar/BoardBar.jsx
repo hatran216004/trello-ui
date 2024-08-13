@@ -11,6 +11,8 @@ import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt'
 
+import { capitalizeFirstLetter } from '~/utils/formatters'
+
 const MENU_STYLES = {
     paddingX: 2,
     color: 'primary.main',
@@ -20,7 +22,7 @@ const MENU_STYLES = {
     '& .MuiSvgIcon-root': { color: 'primary.main' }
 }
 
-const BoardBar = () => {
+const BoardBar = ({ board }) => {
     return (
         <nav>
             <Box
@@ -44,13 +46,13 @@ const BoardBar = () => {
                 >
                     <Chip
                         icon={<DashboardIcon />}
-                        label="With Icon"
+                        label={board?.title}
                         clickable
                         sx={MENU_STYLES}
                     />
                     <Chip
                         icon={<VpnLockIcon />}
-                        label="Public/Private workspace"
+                        label={capitalizeFirstLetter(board?.type)}
                         clickable
                         sx={MENU_STYLES}
                     />
