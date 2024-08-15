@@ -20,9 +20,21 @@ import ContentPasteIcon from '@mui/icons-material/ContentPaste'
 import DragHandleIcon from '@mui/icons-material/DragHandle'
 import ListCard from './ListCard'
 import { mapOrder } from '~/utils/sort'
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
 
 const Column = ({ column }) => {
+    const { attributes, listeners, setNodeRef, transform, transition } =
+        useSortable({ id: column._id, data: { ...column } })
+
+    const dndKitColumnStyles = {
+        touchAction: 'none',
+        transform: CSS.Translate.toString(transform),
+        transition
+    }
+
     const orderedCards = mapOrder(column?.cards, column?.cardOrderIds, '_id')
+
     const [anchorEl, setAnchorEl] = useState(null)
     const open = Boolean(anchorEl)
 
@@ -36,6 +48,10 @@ const Column = ({ column }) => {
 
     return (
         <Box
+            ref={setNodeRef}
+            style={dndKitColumnStyles}
+            {...attributes}
+            {...listeners}
             sx={{
                 padding: '8px 0',
                 width: 300,
