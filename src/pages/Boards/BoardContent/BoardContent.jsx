@@ -7,14 +7,15 @@ import {
     MouseSensor,
     TouchSensor,
     useSensor,
-    useSensors
+    useSensors,
+    closestCorners
 } from '@dnd-kit/core'
 import { arrayMove } from '@dnd-kit/sortable'
 import { DragOverlay } from '@dnd-kit/core'
+import { cloneDeep } from 'lodash'
 
 import Column from './ListColumn/Column'
 import Card from './ListColumn/Column/ListCard/Card'
-import { cloneDeep } from 'lodash'
 
 const ACTIVE_DRAG_ITEM_TYPE = {
     CARD: 'ACTIVE_DRAG_CARD',
@@ -77,7 +78,7 @@ const BoardContent = ({ board }) => {
         } = active
 
         const { id: overCardId } = over
-        // B1: Tìm 2 column theo CardId
+        // B1: Tìm cột chứa phần tử đang kéo và cột chứa phần tử ở vị trí thả theo CardId
         const activeColumn = findColumnByCardId(activeDraggingCardId)
         const overColumn = findColumnByCardId(overCardId)
 
@@ -126,7 +127,8 @@ const BoardContent = ({ board }) => {
                 }
                 if (newOverColumn) {
                     // B7: Kiểm tra xem card đang kéo có tồn tại ở overcoLumn chưa, nếu có thì cần xóa nó trước
-                    newOverColumn.cards.filter(
+                    // (tránh việc có hai bản sao của cùng một card trong cùng một cột)
+                    newOverColumn.cards = newOverColumn.cards.filter(
                         (card) => card._id !== activeDraggingCardId
                     )
                     // B8: Thêm card đang kéo vào overcolumn theo index mới
@@ -175,12 +177,14 @@ const BoardContent = ({ board }) => {
             setActiveDragItemData(null)
         }
     }
+
     return (
         <DndContext
+            collisionDetection={closestCorners} // phát hiện va chạm ở góc phần tử (xử lý khi kéo card với cover lớn)
             onDragStart={handleDragStart}
             onDragOver={handleDragOver}
             onDragEnd={handleDragEnd}
-            sensors={sensors}
+            sensors={sensors} // cảm biến
         >
             <Box
                 sx={{
