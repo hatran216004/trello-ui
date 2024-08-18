@@ -14,10 +14,11 @@ import {
 } from '@dnd-kit/core'
 import { arrayMove } from '@dnd-kit/sortable'
 import { DragOverlay } from '@dnd-kit/core'
-import { cloneDeep } from 'lodash'
+import { cloneDeep, isEmpty } from 'lodash'
 
 import Column from './ListColumn/Column'
 import Card from './ListColumn/Column/ListCard/Card'
+import { generatePlaceholderCard } from '~/utils/formatters'
 
 const ACTIVE_DRAG_ITEM_TYPE = {
     CARD: 'ACTIVE_DRAG_CARD',
@@ -87,7 +88,7 @@ const BoardContent = ({ board }) => {
                 ? OverCardIndex + modifier
                 : overColumn.cards.length + 1
 
-        // B5: Clone mảng pre orderedColumns để xử lý data rồi return - cập nhât orderedColumns mới
+        // B5: Clone mảng pre orderedColumns để xử lý data rồi return - cập nhật orderedColumns mới
         const nextColumns = cloneDeep(prevColumns)
         const newActiveColumn = nextColumns.find(
             (column) => column._id === activeColumn._id
@@ -101,6 +102,12 @@ const BoardContent = ({ board }) => {
             newActiveColumn.cards = newActiveColumn.cards.filter(
                 (card) => card._id !== activeDraggingCardId
             )
+            // Thêm placeholder card nếu active column rỗng
+            if (isEmpty(newActiveColumn.cards)) {
+                newActiveColumn.cards = [
+                    generatePlaceholderCard(newActiveColumn)
+                ]
+            }
             // cập nhật lại cardOrderIds sau khi xóa card được active ở column active
             newActiveColumn.cardOrderIds = newActiveColumn.cards.map(
                 (card) => card._id
@@ -120,6 +127,10 @@ const BoardContent = ({ board }) => {
                     ...activeDraggingCardData,
                     columnId: newOverColumn._id
                 }
+            )
+            // Xóa placeholder card sau khi thêm 1 card mới vào
+            newOverColumn.cards = newOverColumn.cards.filter(
+                (card) => !card.FE_PlaceholderCard
             )
             newOverColumn.cardOrderIds = newOverColumn.cards.map(
                 (card) => card._id
@@ -185,7 +196,7 @@ const BoardContent = ({ board }) => {
         const { active, over } = event
         if (!active || !over) return
 
-        // xử lý kéo thả card
+        // Xử lý kéo thả card
         if (activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.CARD) {
             const {
                 id: activeDraggingCardId,
@@ -195,8 +206,9 @@ const BoardContent = ({ board }) => {
             const activeColumn = findColumnByCardId(activeDraggingCardId)
             const { id: overCardId } = over
             const overColumn = findColumnByCardId(overCardId)
-            // oldDataColumn._id
-            if (activeDragItemData.columnId !== overColumn._id) {
+
+            // kéo thả card 2 column khác nhau
+            if (oldDataColumn._id !== overColumn._id) {
                 setOrderedColumns((prevColumns) =>
                     moveCardBetweenDiffColumns(
                         prevColumns,
@@ -328,7 +340,12 @@ const BoardContent = ({ board }) => {
                 }}
             >
                 <ListColumn columns={orderedColumns} />
-                <DragOverlay dropAnimation={{ duration: 250, easing: 'ease' }}>
+                <DragOverlay
+                    dropAnimation={{
+                        duration: 500,
+                        easing: 'cubic-bezier(0.18, 0.67, 0.6, 1.22)'
+                    }}
+                >
                     {activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.COLUMN ? (
                         <Column column={activeDragItemData} />
                     ) : (

@@ -45,7 +45,8 @@ const Card = ({ card }) => {
             {...listeners}
             sx={{
                 cursor: 'pointer',
-                boxShadow: 'none'
+                boxShadow: 'none',
+                display: card?.FE_PlaceholderCard ? 'none' : 'block'
             }}
         >
             {card.cover && (
